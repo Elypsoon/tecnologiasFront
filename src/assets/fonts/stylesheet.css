@@ -1,5 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-//Font face general
 @font-face {
     font-family: 'Nexa-Bold';
     src: url('/assets/fonts/NexaBold.eot');
@@ -11,9 +9,9 @@
     font-weight: bold;
     font-style: normal;
     font-display: swap;
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: 'Nexa-Light';
     src: url('/assets/fonts/NexaLight.eot');
     src: url('/assets/fonts/NexaLight.eot?#iefix') format('embedded-opentype'),
@@ -24,9 +22,9 @@
     font-weight: 300;
     font-style: normal;
     font-display: swap;
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: 'Nexa';
     src: url('/assets/fonts/NexaRegular.eot');
     src: url('/assets/fonts/NexaRegular.eot?#iefix') format('embedded-opentype'),
@@ -37,16 +35,4 @@
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-  }
-  
-  html, body { height: 100%; }
-  body { margin: 0; font-family: Nexa; }
-  
-  .invalid-feedback {
-    display: block!important;
-    width: 100%;
-    font-size: 0.75rem;
-    color: #ff5b5b;
-    font-family: Nexa;
-  }
-  
+}
