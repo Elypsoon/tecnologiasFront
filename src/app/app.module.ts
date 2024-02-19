@@ -21,13 +21,19 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NavbarComponent } from './partials/navbar/navbar.component';
+import { RegistroAlumnosComponent } from './partials/registro-alumnos/registro-alumnos.component';
+import { RegistroMaestrosComponent } from './partials/registro-maestros/registro-maestros.component';
+import { RegistroAdminComponent } from './partials/registro-admin/registro-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginScreenComponent,
     RegistroScreenComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegistroAlumnosComponent,
+    RegistroMaestrosComponent,
+    RegistroAdminComponent
   ],
   imports: [
     BrowserModule,
