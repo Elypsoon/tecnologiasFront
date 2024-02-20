@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AdministradoresService } from '../../services/administradores.service';
 //Para poder usar jquery definir esto
 declare var $:any;
 
@@ -20,10 +21,12 @@ export class RegistroAdminComponent implements OnInit{
   public inputType_2: string = 'password';
 
   constructor(
+    private administradoresService: AdministradoresService
   ){}
 
   ngOnInit(): void {
     //Definir el esquema a mi JSON
+    this.admin = this.administradoresService.esquemaAdmin();
     this.admin.rol = this.rol;
     console.log("Admin: ", this.admin);
 
@@ -34,7 +37,13 @@ export class RegistroAdminComponent implements OnInit{
   }
 
   public registrar(){
-    
+    //Validar
+    this.errors = [];
+
+    this.errors = this.administradoresService.validarAdmin(this.admin, this.editar)
+    if(!$.isEmptyObject(this.errors)){
+      return false;
+    }
     //TODO ejecuta la siguiente línea
   }
 

@@ -8,7 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgChartsModule } from 'ng2-charts';
 import { LoginScreenComponent } from './screens/login-screen/login-screen.component';
 import { RegistroScreenComponent } from './screens/registro-screen/registro-screen.component';
+import { NavbarComponent } from './partials/navbar/navbar.component';
+//Este import es para los servicios HTTP
+import { HttpClientModule } from '@angular/common/http';
 
+import { RegistroAdminComponent } from './partials/registro-admin/registro-admin.component';
+import { RegistroAlumnosComponent } from './partials/registro-alumnos/registro-alumnos.component';
+import { RegistroMaestrosComponent } from './partials/registro-maestros/registro-maestros.component';
+//Angular material
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -20,10 +27,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { NavbarComponent } from './partials/navbar/navbar.component';
-import { RegistroAlumnosComponent } from './partials/registro-alumnos/registro-alumnos.component';
-import { RegistroMaestrosComponent } from './partials/registro-maestros/registro-maestros.component';
-import { RegistroAdminComponent } from './partials/registro-admin/registro-admin.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +34,9 @@ import { RegistroAdminComponent } from './partials/registro-admin/registro-admin
     LoginScreenComponent,
     RegistroScreenComponent,
     NavbarComponent,
+    RegistroAdminComponent,
     RegistroAlumnosComponent,
-    RegistroMaestrosComponent,
-    RegistroAdminComponent
+    RegistroMaestrosComponent
   ],
   imports: [
     BrowserModule,
@@ -49,9 +52,11 @@ import { RegistroAdminComponent } from './partials/registro-admin/registro-admin
     MatNativeDateModule,
     MatTableModule,
     MatPaginatorModule,
+    HttpClientModule,
     MatCheckboxModule,
     MatDialogModule,
     MatSelectModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
