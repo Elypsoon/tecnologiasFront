@@ -29,7 +29,8 @@ export class MaestrosService {
       'telefono': '',
       'rfc': '',
       'cubiculo': '',
-      'area': ''
+      'area': '',
+      'materias_json': []
       }
   }
 //Validación para el formulario
