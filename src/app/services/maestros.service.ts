@@ -101,8 +101,7 @@ export class MaestrosService {
     }
 
     if(!this.validatorService.required(data["materias_json"])){
-      error["materias_json"] = this.errorService.required;
-      alert("Seleccione al menos una materia");
+      error["materias_json"] = "Debe seleccionar al menos una materia";
     }
 
     //Return arreglo
