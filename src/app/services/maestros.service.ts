@@ -20,8 +20,8 @@ export class MaestrosService {
     return {
       'rol':'',
       'id': '',
-      'nombre': '',
-      'apellido': '',
+      'first_name': '',
+      'last_name': '',
       'email': '',
       'password': '',
       'confirmar_password': '',
@@ -42,12 +42,12 @@ export class MaestrosService {
       error["id"] = this.errorService.required;
     }
 
-    if(!this.validatorService.required(data["nombre"])){
-      error["nombre"] = this.errorService.required;
+    if(!this.validatorService.required(data["first_name"])){
+      error["first_name"] = this.errorService.required;
     }
 
-    if(!this.validatorService.required(data["apellido"])){
-      error["apellido"] = this.errorService.required;
+    if(!this.validatorService.required(data["last_name"])){
+      error["last_name"] = this.errorService.required;
     }
 
     if(!this.validatorService.required(data["email"])){

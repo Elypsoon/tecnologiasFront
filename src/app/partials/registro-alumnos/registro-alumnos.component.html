@@ -4,7 +4,7 @@
         <div class="body-registro">
           <div class="row mt-3 mb-3">
             <div class="form-group col-12">
-              <label class="title-user" for="tipo_usuario">Ingresa los datos del administrador</label>
+              <label class="title-user" for="tipo_usuario">Ingresa los datos del alumno</label>
             </div>
           </div>
           <mat-form-field class="mat-input" appearance="outline">
@@ -15,15 +15,15 @@
   
           <mat-form-field class="mat-input" appearance="outline">
               <mat-label>Nombre</mat-label>
-              <input matInput [(ngModel)]="alumno.nombre" placeholder="Escribe nombre">
+              <input matInput [(ngModel)]="alumno.first_name" placeholder="Escribe nombre">
           </mat-form-field>
-          <div *ngIf="errors.nombre" class="invalid-feedback">{{ errors.nombre }}</div>
+          <div *ngIf="errors.first_name" class="invalid-feedback">{{ errors.first_name }}</div>
   
           <mat-form-field class="mat-input" appearance="outline">
               <mat-label>Apellidos</mat-label>
-              <input matInput [(ngModel)]="alumno.apellido" placeholder="Escribe apellidos">
+              <input matInput [(ngModel)]="alumno.last_name" placeholder="Escribe apellidos">
           </mat-form-field>
-          <div *ngIf="errors.apellido" class="invalid-feedback">{{ errors.apellido }}</div>
+          <div *ngIf="errors.last_name" class="invalid-feedback">{{ errors.last_name }}</div>
   
           <mat-form-field class="mat-input" appearance="outline">
               <mat-label>Correo electrónico</mat-label>
@@ -44,6 +44,14 @@
               <mat-icon matSuffix class="eye-icon" (click)="showPwdConfirmar()">{{hide_2 ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
           <div *ngIf="errors.confirmar_password" class="invalid-feedback">{{ errors.confirmar_password }}</div>
+
+          <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="alumno.nacimiento" (focus)="picker.open()" placeholder="Agregar fecha" (dateChange)="changeFecha($event)" type="string">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div *ngIf="errors.nacimiento" class="invalid-feedback">{{ errors.nacimiento }}</div>  
   
           <mat-form-field class="mat-input" appearance="outline">
             <mat-label>Teléfono</mat-label>

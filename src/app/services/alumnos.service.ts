@@ -20,11 +20,12 @@ export class AlumnosService {
     return {
       'rol':'',
       'matricula': '',
-      'nombre': '',
-      'apellido': '',
+      'first_name': '',
+      'last_name': '',
       'email': '',
       'password': '',
       'confirmar_password': '',
+      'nacimiento': '',
       'curp': '',
       'rfc': '',
       'edad': '',
@@ -41,12 +42,12 @@ export class AlumnosService {
       error["matricula"] = this.errorService.required;
     }
 
-    if(!this.validatorService.required(data["nombre"])){
-      error["nombre"] = this.errorService.required;
+    if(!this.validatorService.required(data["first_name"])){
+      error["first_name"] = this.errorService.required;
     }
 
-    if(!this.validatorService.required(data["apellido"])){
-      error["apellido"] = this.errorService.required;
+    if(!this.validatorService.required(data["last_name"])){
+      error["last_name"] = this.errorService.required;
     }
 
     if(!this.validatorService.required(data["email"])){
@@ -65,6 +66,10 @@ export class AlumnosService {
       if(!this.validatorService.required(data["confirmar_password"])){
         error["confirmar_password"] = this.errorService.required;
       }
+    }
+
+    if(!this.validatorService.required(data["nacimiento"])){
+      error["nacimiento"] = this.errorService.required;
     }
 
     if(!this.validatorService.required(data["curp"])){

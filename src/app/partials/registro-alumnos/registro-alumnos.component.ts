@@ -75,4 +75,14 @@ export class RegistroAlumnosComponent {
       this.hide_2 = false;
     }
   }
+
+  public changeFecha(event :any){
+    console.log(event);
+    console.log(event.value.toISOString());
+    
+    this.alumno.nacimiento = event.value.toISOString().split("T")[0];
+    console.log("Fecha: ", this.alumno.nacimiento);
+  }
 }
+
+
