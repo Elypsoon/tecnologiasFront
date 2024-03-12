@@ -69,7 +69,7 @@
           <mat-label>Cubículo</mat-label>
           <input matInput [(ngModel)]="maestro.cubiculo" placeholder="Escribe el cubículo">
         </mat-form-field>
-        <div *ngIf="errors.edad" class="invalid-feedback">{{ errors.edad }}</div>
+        <div *ngIf="errors.cubiculo" class="invalid-feedback">{{ errors.cubiculo }}</div>
 
         <mat-form-field appearance="outline">
           <mat-label>Area de investigación</mat-label>
@@ -96,7 +96,7 @@
               </mat-checkbox>
             </div>
           </div>
-          <div *ngIf="errors.area" class="invalid-feedback">{{ errors.materias_json }}</div>
+          <div *ngIf="errors.materias_json" class="invalid-feedback">{{ errors.materias_json }}</div>
 
   
           <div class="section-buttons">

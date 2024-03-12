@@ -1,8 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ValidatorService } from './tools/validator.service';
 import { ErrorsService } from './tools/errors.service';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -82,12 +87,6 @@ export class MaestrosService {
       alert("La longitud de caracteres deL RFC es mayor, deben ser 13");
     }
 
-    if(!this.validatorService.required(data["edad"])){
-      error["edad"] = this.errorService.required;
-    }else if(!this.validatorService.numeric(data["edad"])){
-      alert("El formato es solo números");
-    }
-
     if(!this.validatorService.required(data["telefono"])){
       error["telefono"] = this.errorService.required;
     }
@@ -106,5 +105,9 @@ export class MaestrosService {
 
     //Return arreglo
     return error;
+  }
+
+  public registrarMaestro (data: any): Observable <any>{
+    return this.http.post<any>(`${environment.url_api}/maestro/`,data, httpOptions);
   }
 }
