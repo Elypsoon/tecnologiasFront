@@ -162,8 +162,8 @@ export class RegistroMaestrosComponent implements OnInit{
     console.log(event);
     console.log(event.value.toISOString());
     
-    this.maestro.nacimiento = event.value.toISOString().split("T")[0];
-    console.log("Fecha: ", this.maestro.nacimiento);
+    this.maestro.fecha_nacimiento = event.value.toISOString().split("T")[0];
+    console.log("Fecha: ", this.maestro.fecha_nacimiento);
   }
 
   public checkboxChange(event:any){
