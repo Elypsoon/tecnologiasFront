@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -23,10 +24,15 @@ export class MaestrosScreenComponent {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   constructor(
     public facadeService: FacadeService,
-    private maestrosService:MaestrosService,
+    public maestrosService: MaestrosService,
     private router: Router,
+    public dialog: MatDialog
   ){}
 
   ngOnInit(): void {
@@ -95,7 +101,7 @@ export class MaestrosScreenComponent {
 
   //Funcion para editar
   public goEditar(idUser: number){
-    this.router.navigate(["registro/"+idUser]);
+    this.router.navigate(["registro-usuarios/maestro/"+idUser]);
   }
 
   public delete(idUser: number){

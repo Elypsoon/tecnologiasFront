@@ -31,7 +31,7 @@ export class MaestrosService {
       'email': '',
       'password': '',
       'confirmar_password': '',
-      'nacimiento': '',
+      'fecha_nacimiento': '',
       'telefono': '',
       'rfc': '',
       'cubiculo': '',
@@ -74,8 +74,8 @@ export class MaestrosService {
       }
     }
 
-    if(!this.validatorService.required(data["nacimiento"])){
-      error["nacimiento"] = this.errorService.required;
+    if(!this.validatorService.required(data["fecha_nacimiento"])){
+      error["fecha_nacimiento"] = this.errorService.required;
     }
 
     if(!this.validatorService.required(data["rfc"])){
@@ -116,5 +116,16 @@ export class MaestrosService {
     var token = this.facadeService.getSessionToken();
     var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'Bearer '+token});
     return this.http.get<any>(`${environment.url_api}/lista-maestros/`, {headers:headers});
+  }
+
+  public getMaestroByID(idUser: Number){
+    return this.http.get<any>(`${environment.url_api}/maestro/?id=${idUser}`,httpOptions);
+  }
+  
+  //Servicio para actualizar un usuario
+  public editarMaestro (data: any): Observable <any>{
+    var token = this.facadeService.getSessionToken();
+    var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'Bearer '+token});
+    return this.http.put<any>(`${environment.url_api}/maestros-edit/`, data, {headers:headers});
   }
 }
