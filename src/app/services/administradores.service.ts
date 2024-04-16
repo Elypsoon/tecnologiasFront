@@ -124,4 +124,9 @@ export class AdministradoresService {
     return this.http.put<any>(`${environment.url_api}/admins-edit/`, data, {headers:headers});
   }
 
+  public eliminarAdmin(idUser: number): Observable <any>{
+    var token = this.facadeService.getSessionToken();
+    var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'Bearer '+token});
+    return this.http.delete<any>(`${environment.url_api}/admins-edit/?id=${idUser}`,{headers:headers});
+  }
 }

@@ -97,7 +97,7 @@ export class RegistroAlumnosComponent {
     }
     console.log("Pasó la validación");
 
-    this.alumnosService.editarAdmin(this.alumno).subscribe(
+    this.alumnosService.editarAlumno(this.alumno).subscribe(
       (response)=>{
         alert("Administrador editado correctamente");
         console.log("Admin editado: ", response);
