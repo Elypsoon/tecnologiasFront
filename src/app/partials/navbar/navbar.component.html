@@ -7,7 +7,6 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <ng-container *ngIf="tipo!='registro-usuarios'; else registraUsers">
-            <!-- 1Todo el menú de los usuarios -->
             <li class="nav-item">
               <a class="nav-link active" id="principal" aria-current="page" (click)="clickNavLink('home')">Inicio</a>
             </li>
@@ -20,7 +19,7 @@
             <li class="nav-item">
               <a class="nav-link">Lista de materias</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="rol=='administrador'">
               <a class="nav-link" id="graficas" (click)="clickNavLink('graficas')">Gráficas</a>
             </li>
             <li class="nav-item dropdown">
