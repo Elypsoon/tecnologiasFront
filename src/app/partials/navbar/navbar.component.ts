@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FacadeService } from 'src/app/services/facade.service';
 declare var $:any;
 @Component({
   selector: 'app-navbar',
@@ -10,14 +11,15 @@ export class NavbarComponent implements OnInit{
   @Input() tipo:string = "";
   @Input() rol:string ="";
 
-  public token : string = "";
+  public token2 : string = "";
 
   constructor(
-    private router: Router
+    private router: Router,
+    private facadeService: FacadeService
   ){}
 
   ngOnInit(): void {
-
+    this.token2 = this.facadeService.getSessionToken();
   }
 
   public logout(){

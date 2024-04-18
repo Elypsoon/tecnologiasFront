@@ -99,12 +99,12 @@ export class RegistroAlumnosComponent {
 
     this.alumnosService.editarAlumno(this.alumno).subscribe(
       (response)=>{
-        alert("Administrador editado correctamente");
-        console.log("Admin editado: ", response);
+        alert("Alumno editado correctamente");
+        console.log("Alumno editado: ", response);
         //Si se editó, entonces mandar al home
         this.router.navigate(["home"]);
       }, (error)=>{
-        alert("No se pudo editar el administrador");
+        alert("No se pudo editar el alumno");
       }
     );
   }
