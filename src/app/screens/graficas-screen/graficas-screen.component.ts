@@ -12,6 +12,8 @@ export class GraficasScreenComponent implements OnInit{
   //Agregar chartjs-plugin-datalabels
   //Variables
   public total_user: any = {};
+  public cant: number[] = [];
+  
   //Histograma
   lineChartData = {
     labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
@@ -51,12 +53,13 @@ export class GraficasScreenComponent implements OnInit{
   barChartPlugins = [ DatalabelsPlugin ];
 
   //Circular
-  //Circular
+  //Circular 
+  
   pieChartData = {
     labels: ["Administradores", "Maestros", "Alumnos"],
     datasets: [
       {
-        data:[89, 34, 43],
+        data: [90,21,18],
         label: 'Registro de usuarios',
         backgroundColor: [
           '#FCFF44',
@@ -66,6 +69,9 @@ export class GraficasScreenComponent implements OnInit{
       }
     ]
   }
+
+  
+
   pieChartOption = {
     responsive:false
   }
@@ -92,7 +98,7 @@ export class GraficasScreenComponent implements OnInit{
   doughnutChartPlugins = [ DatalabelsPlugin ];
 
   constructor(
-    private administradoresServices: AdministradoresService
+    private administradoresServices: AdministradoresService,
   ){}
 
   ngOnInit(): void {
