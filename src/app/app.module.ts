@@ -33,6 +33,9 @@ import { AlumnosScreenComponent } from './screens/alumnos-screen/alumnos-screen.
 import { MaestrosScreenComponent } from './screens/maestros-screen/maestros-screen.component';
 import { EliminarUserModalComponent } from './modals/eliminar-user-modal/eliminar-user-modal.component';
 import { GraficasScreenComponent } from './screens/graficas-screen/graficas-screen.component';
+import { RegistroMateriasComponent } from './partials/registro-materias/registro-materias.component';
+import { MateriasScreenComponent } from './screens/materias-screen/materias-screen.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
 
 
 @NgModule({
@@ -49,7 +52,9 @@ import { GraficasScreenComponent } from './screens/graficas-screen/graficas-scre
     AlumnosScreenComponent,
     MaestrosScreenComponent,
     EliminarUserModalComponent,
-    GraficasScreenComponent
+    GraficasScreenComponent,
+    RegistroMateriasComponent,
+    MateriasScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -68,10 +73,11 @@ import { GraficasScreenComponent } from './screens/graficas-screen/graficas-scre
     HttpClientModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatSelectModule
-
+    MatSelectModule,
+    NgxMaskDirective, 
+    NgxMaskPipe
   ],
-  providers: [],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

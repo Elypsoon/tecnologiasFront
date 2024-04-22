@@ -6,7 +6,7 @@ import { AlumnosService } from 'src/app/services/alumnos.service';
 import { FacadeService } from 'src/app/services/facade.service';
 import { MaestrosService } from 'src/app/services/maestros.service';
 import { Location } from '@angular/common';
-
+import { MateriasService } from 'src/app/services/materias.service';
 @Component({
   selector: 'app-registro-screen',
   templateUrl: './registro-screen.component.html',
@@ -17,6 +17,7 @@ export class RegistroScreenComponent implements OnInit{
   public tipo:string = "registro-usuarios";
   //JSON para los usuarios (admin, maestros, alumnos)
   public user:any ={};
+  public materia:any = {};
 
   public isUpdate:boolean = false;
   public errors:any = {};
@@ -24,10 +25,12 @@ export class RegistroScreenComponent implements OnInit{
   public isAdmin:boolean = false;
   public isAlumno:boolean = false;
   public isMaestro:boolean = false;
+  public isMateria:boolean = false;
   public editar: boolean = false;
   public tipo_user:string = "";
   //Info del usuario
   public idUser: Number = 0;
+  public idMat: Number = 0;
   public rol: string = "";
 
   constructor(
@@ -37,7 +40,8 @@ export class RegistroScreenComponent implements OnInit{
     private facadeService: FacadeService,
     private administradoresService: AdministradoresService,
     private maestrosService: MaestrosService,
-    private alumnosService: AlumnosService
+    private alumnosService: AlumnosService,
+    private materiasService: MateriasService
   ){}
 
   ngOnInit(): void {
@@ -55,7 +59,6 @@ export class RegistroScreenComponent implements OnInit{
       //Al iniciar la vista obtiene el usuario por su ID
       this.obtenerUserByID();
     }
-
   }
 
   //Función para obtener un solo usuario por su ID
@@ -109,7 +112,6 @@ export class RegistroScreenComponent implements OnInit{
       );
     }
   }
-
 
   public radioChange(event: MatRadioChange) {
 

@@ -41,7 +41,7 @@
             </div>
             <div class="row mt-3" style="text-align: center;">
               <div class="form-group col-12">
-                <mat-radio-group [(ngModel)]="user.tipo_usuario" (change)="radioChange($event)" [disabled]="editar">
+                <mat-radio-group [(ngModel)]="user.tipo_usuario" (change)="radioChange($event)" [disabled]="editar" *ngIf="!isMateria">
                   <mat-radio-button value="administrador">Administrador</mat-radio-button>
                   <mat-radio-button value="alumno">Alumno</mat-radio-button>
                   <mat-radio-button value="maestro">Maestro</mat-radio-button>
@@ -59,6 +59,9 @@
             </section>
             <section class="registro-maestros" *ngIf="isMaestro">
               <app-registro-maestros [rol]="tipo_user" [datos_user]="user"></app-registro-maestros>
+            </section>
+            <section class="registro-materias" *ngIf="isMateria">
+              <app-registro-materias [datos_materia]="materia"></app-registro-materias>
             </section>
           </section>
 

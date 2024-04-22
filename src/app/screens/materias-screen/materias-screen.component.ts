@@ -1,26 +1,28 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { MateriasService } from './../../services/materias.service';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/eliminar-user-modal.component';
 import { FacadeService } from 'src/app/services/facade.service';
-import { MaestrosService } from 'src/app/services/maestros.service';
 
 @Component({
-  selector: 'app-maestros-screen',
-  templateUrl: './maestros-screen.component.html',
-  styleUrls: ['./maestros-screen.component.scss']
+  selector: 'app-materias-screen',
+  templateUrl: './materias-screen.component.html',
+  styleUrls: ['./materias-screen.component.scss']
 })
-export class MaestrosScreenComponent {
-  public name_user:string = "";
-  public rol:string = "";
+export class MateriasScreenComponent {
+  public lista_materias: any[] = [];
   public token : string = "";
-  public lista_maestros: any[] = [];
+  public rol:string = "";
+  public name_user:string = "";
+
+  
 
   //Para la tabla
-  displayedColumns: string[] = ['id', 'nombre', 'email', 'fecha_nacimiento', 'telefono', 'rfc', 'cubiculo', 'area', "materias_json", 'editar', 'eliminar'];
-  dataSource = new MatTableDataSource<DatosUsuario>(this.lista_maestros as DatosUsuario[]);
+  displayedColumns: string[] = ['nrc', 'nombre', 'seccion', 'dias', 'horaInicio', 'horaFin', 'salon', 'programa', 'editar', 'eliminar'];
+  dataSource = new MatTableDataSource<DatosMateria>(this.lista_materias as DatosMateria[]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -30,7 +32,7 @@ export class MaestrosScreenComponent {
 
   constructor(
     public facadeService: FacadeService,
-    public maestrosService: MaestrosService,
+    public materiasService: MateriasService,
     private router: Router,
     public dialog: MatDialog
   ){}
@@ -47,7 +49,7 @@ export class MaestrosScreenComponent {
       this.router.navigate([""]);
     }
 
-    this.obtenerMaestros();
+    this.obtenerMaterias();
     //Para paginador
     this.initPaginator();
   }
@@ -77,21 +79,16 @@ export class MaestrosScreenComponent {
   }
 
   //Obtener alumnos
-  public obtenerMaestros(){
-    this.maestrosService.obtenerListaMaestros().subscribe(
+  public obtenerMaterias(){
+    this.materiasService.obtenerListaMaterias().subscribe(
       (response)=>{
-        this.lista_maestros = response;
-        console.log("Lista users: ", this.lista_maestros);
-        if(this.lista_maestros.length > 0){
-          //Agregar datos del nombre e email
-          this.lista_maestros.forEach(usuario => {
-            usuario.first_name = usuario.user.first_name;
-            usuario.last_name = usuario.user.last_name;
-            usuario.email = usuario.user.email;
-          });
-          console.log("Otro user: ", this.lista_maestros);
+        this.lista_materias = response;
+        console.log("Lista materias: ", this.lista_materias);
+        if(this.lista_materias.length > 0){
+  
+          console.log("Otro user: ", this.lista_materias);
 
-          this.dataSource = new MatTableDataSource<DatosUsuario>(this.lista_maestros as DatosUsuario[]);
+          this.dataSource = new MatTableDataSource<DatosMateria>(this.lista_materias as DatosMateria[]);
         }
       }, (error)=>{
         alert("No se pudo obtener la lista de usuarios");
@@ -100,13 +97,13 @@ export class MaestrosScreenComponent {
   }
 
   //Funcion para editar
-  public goEditar(idUser: number){
-    this.router.navigate(["registro-usuarios/maestro/"+idUser]);
+  public goEditar(idMat: number){
+    this.router.navigate(["registro-materias/"+idMat]);
   }
 
-  public delete(idUser: number){
+  public delete(idMat: number){
     const dialogRef = this.dialog.open(EliminarUserModalComponent,{
-      data: {id: idUser, rol: 'maestro'}, //Se pasan valores a través del componente
+      data: {id: idMat, rol: 'maestro'}, //Se pasan valores a través del componente
       height: '288px',
       width: '328px',
     });
@@ -125,16 +122,14 @@ export class MaestrosScreenComponent {
 }//Cierre de la clase
 
 //Esto va fuera de la llave que cierra la clase
-export interface DatosUsuario {
+export interface DatosMateria {
   id: number,
-  id_trabajador: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  fecha_nacimiento: string,
-  telefono: string,
-  rfc: string,
-  cubiculo: number,
-  area: string,
-  materias_json: any[]
+  nrc: number,
+  nombre: string;
+  seccion: number;
+  dias: any[];
+  horaInicio: string;
+  horaFinal: string,
+  salon: string,
+  programa: string,
 }
