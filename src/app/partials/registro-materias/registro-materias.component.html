@@ -27,13 +27,23 @@
 
         <mat-form-field class="mat-input" appearance="outline">
             <mat-label>Hora de inicio</mat-label>
-            <input matInput type="time" [(ngModel)]="materia.horaInicio" placeholder="Coloca la hora de inicio">
-        </mat-form-field>
+            <input matInput [(ngModel)]="materia.horaInicio" placeholder="Coloca la hora de inicio" aria-label="12hr format" [ngxTimepicker]="default" [format]="24" readonly>
+            <ngx-material-timepicker #default></ngx-material-timepicker>
+            <mat-icon matSuffix
+              (click)="default.open()">
+              watch_later
+            </mat-icon>
+          </mat-form-field>
         <div *ngIf="errors.horaInicio" class="invalid-feedback">{{ errors.horaInicio }}</div>
 
         <mat-form-field class="mat-input" appearance="outline">
-            <mat-label>Hora final</mat-label>
-            <input matInput type="time" [(ngModel)]="materia.horaFin" placeholder="Coloca la hora de fin">
+          <mat-label>Hora Final</mat-label>
+          <input matInput [(ngModel)]="materia.horaFin" placeholder="Coloca la hora final" aria-label="12hr format" [ngxTimepicker]="default2" [format]="24" readonly>
+          <ngx-material-timepicker #default2></ngx-material-timepicker>
+          <mat-icon matSuffix
+              (click)="default2.open()">
+              watch_later
+            </mat-icon>
         </mat-form-field>
         <div *ngIf="errors.horaFin" class="invalid-feedback">{{ errors.horaFin }}</div>
 

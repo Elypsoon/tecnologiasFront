@@ -98,6 +98,8 @@ export class RegistroMateriasComponent {
     this.materiasService.getSubByID(this.idMat).subscribe(
       (response)=>{
         this.materia = response;
+        this.materia.horaInicio = this.materia.horaInicio.substring(0,5);
+        this.materia.horaFin = this.materia.horaFin.substring(0,5);
         console.log("Datos materia: ", this.materia);
       }, (error)=>{
         alert("No se pudieron obtener los datos de la materia para editar");

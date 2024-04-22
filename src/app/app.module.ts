@@ -36,7 +36,9 @@ import { GraficasScreenComponent } from './screens/graficas-screen/graficas-scre
 import { RegistroMateriasComponent } from './partials/registro-materias/registro-materias.component';
 import { MateriasScreenComponent } from './screens/materias-screen/materias-screen.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
-
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { EditarModalComponent } from './modals/editar-modal/editar-modal.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
     EliminarUserModalComponent,
     GraficasScreenComponent,
     RegistroMateriasComponent,
-    MateriasScreenComponent
+    MateriasScreenComponent,
+    EditarModalComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,9 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
     MatDialogModule,
     MatSelectModule,
     NgxMaskDirective, 
-    NgxMaskPipe
+    NgxMaskPipe,
+    NgxMaterialTimepickerModule,
+    MatFormFieldModule
   ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]
