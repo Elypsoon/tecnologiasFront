@@ -106,7 +106,7 @@ export class MateriasService {
   public eliminarMateria(id: number): Observable <any>{
     var token = this.facadeService.getSessionToken();
     var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'Bearer '+token});
-    return this.http.delete<any>(`${environment.url_api}/materias-edit/?nrc=${id}`,{headers:headers});
+    return this.http.delete<any>(`${environment.url_api}/materias-edit/?id=${id}`,{headers:headers});
   }
 
 }
