@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FacadeService } from 'src/app/services/facade.service';
 import { MateriasService } from 'src/app/services/materias.service';
 import { Location } from '@angular/common';
+import { EditarModalComponent } from 'src/app/modals/editar-modal/editar-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 declare var $:any;
 
@@ -48,7 +50,8 @@ export class RegistroMateriasComponent {
     private materiasService: MateriasService,
     private router: Router,
     public activatedRoute: ActivatedRoute,
-    private facadeService: FacadeService
+    private facadeService: FacadeService,
+    public dialog: MatDialog,
   ){}
 
   ngOnInit(): void {
@@ -117,17 +120,32 @@ export class RegistroMateriasComponent {
     }
     console.log("Pasó la validación");
 
-    this.materiasService.editarMateria(this.materia).subscribe(
-      (response)=>{
-        alert("Materia editada correctamente");
-        console.log("Materia editada: ", response);
-        //Si se editó, entonces mandar al home
-        this.router.navigate(["home"]);
-      }, (error)=>{
-        alert("No se pudo editar la materia");
-        console.log("Error: ", error);
+    const dialogRef = this.dialog.open(EditarModalComponent,{
+      data: {rol: 'esta materia'},
+      height: '288px',
+      width: '328px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.isEdit){
+        this.materiasService.editarMateria(this.materia).subscribe(
+          (response)=>{
+            alert("Materia editada correctamente");
+            console.log("Materia editada: ", response);
+            //Si se editó, entonces mandar al home
+            this.router.navigate(["home"]);
+          }, (error)=>{
+            alert("No se pudo editar la materia");
+            console.log("Error: ", error);
+          }
+        );
+      }else{
+        console.log("No se editó la materia");
       }
-    );
+    });
+
+
+    
   }
 
   public checkboxChange(event:any){
