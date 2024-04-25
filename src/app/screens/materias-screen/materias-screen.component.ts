@@ -21,7 +21,7 @@ export class MateriasScreenComponent {
   
 
   //Para la tabla
-  displayedColumns: string[] = ['nrc', 'nombre', 'seccion', 'dias', 'horaInicio', 'horaFin', 'salon', 'programa', 'editar', 'eliminar'];
+  displayedColumns: string[];
   dataSource = new MatTableDataSource<DatosMateria>(this.lista_materias as DatosMateria[]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -52,8 +52,16 @@ export class MateriasScreenComponent {
     this.obtenerMaterias();
     //Para paginador
     this.initPaginator();
+    this.mostrarTabla();
   }
 
+  public mostrarTabla(){
+    if(this.rol=="administrador"){
+      this.displayedColumns = ['nrc', 'nombre', 'seccion', 'dias', 'horaInicio', 'horaFin', 'salon', 'programa', 'editar', 'eliminar'];;
+    }else if(this.rol=="maestro"){
+      this.displayedColumns = ['nrc', 'nombre', 'seccion', 'dias', 'horaInicio', 'horaFin', 'salon', 'programa'];
+    }
+  }
   //Para paginación
   public initPaginator(){
     setTimeout(() => {

@@ -92,7 +92,7 @@ export class GraficasScreenComponent implements OnInit {
     datasets: [
       {
         data: [], // This will hold dynamic data for user counts
-        label: 'Cantidad de Usuarios',
+        label: 'Registro de Usuarios',
         backgroundColor: ['#007bff', '#28a745', '#dc3545'],
       },
     ],

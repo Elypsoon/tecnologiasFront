@@ -20,7 +20,7 @@ export class AlumnosScreenComponent implements OnInit{
   public lista_alumnos: any[] = [];
 
   //Para la tabla
-  displayedColumns: string[] = ['matricula', 'nombre', 'email', 'fecha_nacimiento', 'edad', 'curp', 'rfc', 'telefono', 'ocupacion', 'editar', 'eliminar'];
+  displayedColumns: string[];
   dataSource = new MatTableDataSource<DatosUsuario>(this.lista_alumnos as DatosUsuario[]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -47,6 +47,16 @@ export class AlumnosScreenComponent implements OnInit{
     this.obtenerAlumnos();
     //Para paginador
     this.initPaginator();
+
+    this.mostrarTabla();
+  }
+
+  public mostrarTabla(){
+    if(this.rol=="administrador" || this.rol=="maestro"){
+      this.displayedColumns = ['matricula', 'nombre', 'email', 'fecha_nacimiento', 'edad', 'curp', 'rfc', 'telefono', 'ocupacion', 'editar', 'eliminar'];
+    }else if(this.rol=="alumno"){
+      this.displayedColumns = ['matricula', 'nombre', 'email', 'fecha_nacimiento', 'edad', 'curp', 'rfc', 'telefono', 'ocupacion'];
+    }
   }
 
   //Para paginación

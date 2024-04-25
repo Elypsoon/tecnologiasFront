@@ -18,30 +18,14 @@
             </div>
           </div>
           <!-- Home para la sección de gráficas -->
-          <div class="row w-100">
-            <div class="col-12">
-              <div class="row">
-                <!-- Barras -->
-                <div class="col-6 graph">
-                  <canvas
-                    baseChart
-                    width="600"
-                    height="600"
-                    type="bar"
-                    [data]="barChartData"
-                    [plugins]="barChartPlugins"
-                    [options]="barChartOption"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
+          
           <!-- Gráfica circular y de dona-->
           <div class="row w-100 mt-5 mb-5">
             <div class="col-6 graph">
               <canvas
                 baseChart
-                width="200"
-                height="200"
+                width="300"
+                height="300"
                 type="pie"
                 [data]="pieChartData"
                 [plugins]="pieChartPlugins"
@@ -50,12 +34,12 @@
             <div class="col-6 graph">
               <canvas
                 baseChart
-                width="200"
-                height="200"
-                type="doughnut"
-                [data]="doughnutChartData"
-                [plugins]="doughnutChartPlugins"
-                [options]="doughnutChartOption"></canvas>
+                width="600"
+                height="700"
+                type="bar"
+                [data]="barChartData"
+                [plugins]="barChartPlugins"
+                [options]="barChartOption"></canvas>
             </div>
           </div>
         </div>
