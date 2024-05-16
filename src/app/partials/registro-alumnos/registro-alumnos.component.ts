@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlumnosService } from 'src/app/services/alumnos.service';
 import { FacadeService } from 'src/app/services/facade.service';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { EditarModalComponent } from 'src/app/modals/editar-modal/editar-modal.component';
 
 //Para poder usar jquery definir esto
 declare var $:any;
@@ -33,7 +35,8 @@ export class RegistroAlumnosComponent {
     private location : Location,
     private router: Router,
     public activatedRoute: ActivatedRoute,
-    private facadeService: FacadeService
+    private facadeService: FacadeService,
+    private dialog: MatDialog
   ){}
 
   ngOnInit(): void {
@@ -97,16 +100,28 @@ export class RegistroAlumnosComponent {
     }
     console.log("Pasó la validación");
 
-    this.alumnosService.editarAlumno(this.alumno).subscribe(
-      (response)=>{
-        alert("Alumno editado correctamente");
-        console.log("Alumno editado: ", response);
-        //Si se editó, entonces mandar al home
-        this.router.navigate(["home"]);
-      }, (error)=>{
-        alert("No se pudo editar el alumno");
+    const dialogRef = this.dialog.open(EditarModalComponent,{
+      data: {rol: 'este alumno'},
+      height: '288px',
+      width: '328px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.isEdit){
+        this.alumnosService.editarAlumno(this.alumno).subscribe(
+          (response)=>{
+            alert("Alumno editado correctamente");
+            console.log("Alumno editado: ", response);
+            //Si se editó, entonces mandar al home
+            this.router.navigate(["home"]);
+          }, (error)=>{
+            alert("No se pudo editar el alumno");
+          }
+        );
+      }else{
+        console.log("No se editó la materia");
       }
-    );
+    });
   }
 
   //Funciones para password

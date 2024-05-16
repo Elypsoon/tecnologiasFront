@@ -3,6 +3,8 @@ import { AdministradoresService } from '../../services/administradores.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FacadeService } from 'src/app/services/facade.service';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { EditarModalComponent } from 'src/app/modals/editar-modal/editar-modal.component';
 
 //Para poder usar jquery definir esto
 declare var $:any;
@@ -33,8 +35,8 @@ export class RegistroAdminComponent implements OnInit{
     private router: Router,
     public activatedRoute: ActivatedRoute,
     private administradoresService: AdministradoresService,
-    private facadeService: FacadeService
-
+    private facadeService: FacadeService,
+    private dialog: MatDialog
   ){}
 
   ngOnInit(): void {
@@ -98,16 +100,28 @@ export class RegistroAdminComponent implements OnInit{
     }
     console.log("Pasó la validación");
 
-    this.administradoresService.editarAdmin(this.admin).subscribe(
-      (response)=>{
-        alert("Administrador editado correctamente");
-        console.log("Admin editado: ", response);
-        //Si se editó, entonces mandar al home
-        this.router.navigate(["home"]);
-      }, (error)=>{
-        alert("No se pudo editar el administrador");
+    const dialogRef = this.dialog.open(EditarModalComponent,{
+      data: {rol: 'este administrador'},
+      height: '288px',
+      width: '328px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.isEdit){
+        this.administradoresService.editarAdmin(this.admin).subscribe(
+          (response)=>{
+            alert("Administrador editado correctamente");
+            console.log("Admin editado: ", response);
+            //Si se editó, entonces mandar al home
+            this.router.navigate(["home"]);
+          }, (error)=>{
+            alert("No se pudo editar el administrador");
+          }
+        );
+      }else{
+        console.log("No se editó la materia");
       }
-    );
+    });
   }
 
   //Funciones para password

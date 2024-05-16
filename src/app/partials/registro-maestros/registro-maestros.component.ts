@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 import { MaestrosService } from './../../services/maestros.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FacadeService } from 'src/app/services/facade.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditarModalComponent } from 'src/app/modals/editar-modal/editar-modal.component';
 //Para poder usar jquery definir esto
 declare var $:any;
 @Component({
@@ -56,7 +58,8 @@ export class RegistroMaestrosComponent implements OnInit{
     private maestrosService: MaestrosService,
     private router: Router,
     public activatedRoute: ActivatedRoute,
-    private facadeService: FacadeService
+    private facadeService: FacadeService,
+    public dialog: MatDialog,
   ){}
 
   ngOnInit(): void {
@@ -119,16 +122,29 @@ export class RegistroMaestrosComponent implements OnInit{
     }
     console.log("Pasó la validación");
 
-    this.maestrosService.editarMaestro(this.maestro).subscribe(
-      (response)=>{
-        alert("Maestro editado correctamente");
-        console.log("Maestro editado: ", response);
-        //Si se editó, entonces mandar al home
-        this.router.navigate(["home"]);
-      }, (error)=>{
-        alert("No se pudo editar el maestro");
+    const dialogRef = this.dialog.open(EditarModalComponent,{
+      data: {rol: 'este maestro'},
+      height: '288px',
+      width: '328px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.isEdit){
+        this.maestrosService.editarMaestro(this.maestro).subscribe(
+          (response)=>{
+            alert("Maestro editado correctamente");
+            console.log("Maestro editado: ", response);
+            //Si se editó, entonces mandar al home
+            this.router.navigate(["home"]);
+          }, (error)=>{
+            alert("No se pudo editar el maestro");
+          }
+        );
+      }else{
+        console.log("No se editó la materia");
       }
-    );
+    });
+
   }
 
   //Funciones para password

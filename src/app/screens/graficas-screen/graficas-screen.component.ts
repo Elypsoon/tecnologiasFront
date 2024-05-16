@@ -1,6 +1,7 @@
 import { AdministradoresService } from 'src/app/services/administradores.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
+//El changeDetectorRef es un servicio que nos permite detectar cambios en la vista
 
 interface ChartData {
   labels: string[];
@@ -55,7 +56,7 @@ export class GraficasScreenComponent implements OnInit {
     labels: ['Administradores', 'Maestros', 'Alumnos'],
     datasets: [
       {
-        data: [], // Datos dinámicos irán aquí
+        data: [], //Se deja vacío para que se llene con datos dinámicos
         label: 'Registro de usuarios',
         backgroundColor: ['#FCFF44', '#F1C8F2', '#31E731'],
       },
@@ -91,7 +92,7 @@ export class GraficasScreenComponent implements OnInit {
     labels: ['Administradores', 'Maestros', 'Alumnos'],
     datasets: [
       {
-        data: [], // This will hold dynamic data for user counts
+        data: [],
         label: 'Registro de Usuarios',
         backgroundColor: ['#007bff', '#28a745', '#dc3545'],
       },
@@ -109,7 +110,7 @@ export class GraficasScreenComponent implements OnInit {
       next: (data) => {
         console.log('Datos recibidos:', data);
         this.updateChartData(data);
-        this.cdr.detectChanges(); // Trigger change detection
+        this.cdr.detectChanges(); 
       },
       error: (error) => {
         console.error('Error al obtener datos de usuarios', error);
@@ -117,16 +118,15 @@ export class GraficasScreenComponent implements OnInit {
     });
   }
 
+  //Esta función se encarga de actualizar los datos de las gráficas
   updateChartData(data: any) {
-    // Update data for all charts here
-    this.pieChartData.datasets[0].data = [data.admins, data.maestros, data.alumnos];
+    this.pieChartData.datasets[0].data = [data.admins, data.maestros, data.alumnos]; //Se cargan los datos en la gráfica
     this.doughnutChartData.datasets[0].data = [data.admins, data.maestros, data.alumnos];
-    this.barChartData.datasets[0].data = [data.admins, data.maestros, data.alumnos]; // Update bar chart data
+    this.barChartData.datasets[0].data = [data.admins, data.maestros, data.alumnos];
 
-    // Re-assign data to trigger chart updates
-    this.pieChartData = { ...this.pieChartData };
+    this.pieChartData = { ...this.pieChartData }; //EL operador de propagación se utiliza para crear una nueva referencia, así se detectan los cambios
     this.doughnutChartData = { ...this.doughnutChartData };
     this.barChartData = { ...this.barChartData };
-    this.cdr.detectChanges(); // Ensure the chart updates reflect immediately
+    this.cdr.detectChanges(); //Se detectan los cambios en la vistay se fuerza la actualización
   }
 }
